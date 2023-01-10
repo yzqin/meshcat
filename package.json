@@ -14,7 +14,7 @@
     "ccapture.js": "aceslowman/ccapture.js#npm-fix",
     "dat.gui": "^0.7.7",
     "@msgpack/msgpack": "^2.8.0",
-    "three": "^0.140",
+    "three": "^0.146",
     "three-wtm": "^1.0",
     "wwobjloader2": "^4.0",
     "yarn": "^1.22.18"
