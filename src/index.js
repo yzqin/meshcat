@@ -491,16 +491,24 @@ class SceneNode {
             this.object.quaternion.set(value[0], value[1], value[2], value[3]);
         } else if (property === "scale") {
             this.object.scale.set(value[0], value[1], value[2]);
+        } else if (property === "opacity") {
+            this.object.material.opacity = value;
+            if(value != 1.) {
+                node.material.transparent = true
+            }
+            else {
+                node.material.transparent = false
+            }
         } else if (property === "color") {
             function setNodeColor(node, value) {
                 if (node.material) {
                     node.material.color.setRGB(value[0], value[1], value[2])
 
                     let alpha = value[3]
-                    node.material.opacity = alpha 
+                    node.material.opacity = alpha
                     if(alpha != 1.) {
                        node.material.transparent = true
-                    } 
+                    }
                     else {
                         node.material.transparent = false
                     }
@@ -917,7 +925,7 @@ class Viewer {
         // TODO: probably shouldn't be directly accessing window?
         window.onload = (evt) => this.set_3d_pane_size();
         window.addEventListener('resize', (evt) => this.set_3d_pane_size(), false);
-        window.addEventListener('keydown', (evt) => {this.on_keydown(evt);}); 
+        window.addEventListener('keydown', (evt) => {this.on_keydown(evt);});
 
         requestAnimationFrame(() => this.set_3d_pane_size());
         if (animate || animate === undefined) {
