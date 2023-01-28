@@ -492,13 +492,21 @@ class SceneNode {
         } else if (property === "scale") {
             this.object.scale.set(value[0], value[1], value[2]);
         } else if (property === "opacity") {
-            this.object.material.opacity = value;
-            if(value != 1.) {
-                node.material.transparent = true
+            function setNodeOpacity(node, value) {
+                if (node.material) {
+                    node.material.opacity = value;
+                    if(value != 1.) {
+                        node.material.transparent = true;
+                    }
+                    else {
+                        node.material.transparent = false;
+                    }
+                }
+                for (let child of node.children) {
+                    setNodeOpacity(child, value);
+                }
             }
-            else {
-                node.material.transparent = false
-            }
+            setNodeOpacity(this.object, value)
         } else if (property === "color") {
             function setNodeColor(node, value) {
                 if (node.material) {
